@@ -71,6 +71,7 @@ const Group = () => {
             <Stack
               spacing={2}
               direction="column"
+              className="scrollbar"
               sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
             >
               <Stack spacing={2.4}>

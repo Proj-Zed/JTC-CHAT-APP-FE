@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -18,6 +18,7 @@ import useSettings from "../../hooks/useSettings";
 import { useNavigate } from "react-router-dom";
 import { LogoutUser } from "../../redux/slices/auth";
 import { useDispatch } from "react-redux";
+import ThemeSwitch from "../../components/ThemeSwitch";
 
 const getPath = (index) => {
   switch (index) {
@@ -55,8 +56,6 @@ const SideBar = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
 
-  const { onToggleMode } = useSettings();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -65,6 +64,16 @@ const SideBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  //   ThemeSwitch
+  const { onToggleMode } = useSettings(); // useSettings from custom hooks
+  const [isSwitchChecked, setIsSwitchChecked] = useState(
+    theme.palette.mode === "light"
+  );
+
+  useEffect(() => {
+    setIsSwitchChecked(theme.palette.mode === "light");
+  }, [theme.palette.mode]);
 
   return (
     <Box
@@ -169,11 +178,11 @@ const SideBar = () => {
           </Stack>
         </Stack>
         <Stack alignItems={"center"} spacing={4}>
-          <AntSwitch
+          <ThemeSwitch
             onChange={() => {
               onToggleMode();
             }}
-            defaultChecked
+            checked={isSwitchChecked}
           />
           <Avatar
             id="basic-button"

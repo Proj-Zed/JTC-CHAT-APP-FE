@@ -56,7 +56,6 @@ export function LoginUser(formValues) {
             token: response.data.token,
           })
         );
-        console.log(response.data.message);
         dispatch(
           showSnackbar({ severity: "success", message: response.data.message })
         );

@@ -16,7 +16,6 @@ import {
 import React, { useState } from "react";
 import { ChatList } from "../../data";
 //import { SimpleBarStyle } from "../../components/Scrollbar";
-import { Scrollbars } from "react-custom-scrollbars-2";
 import {
   Search,
   SearchIconWrapper,
@@ -87,6 +86,7 @@ const Chats = () => {
           <Stack
             spacing={2}
             direction="column"
+            className="scrollbar"
             sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
           >
             {/* <Scrollbars
