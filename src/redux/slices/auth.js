@@ -50,33 +50,33 @@ export function LoginUser(formValues) {
         }
       )
       .then(function (response) {
-        console.log(response);
         dispatch(
           slice.actions.logIn({
             isLoggedIn: true,
             token: response.data.token,
           })
         );
-
+        console.log(response.data.message);
         dispatch(
           showSnackbar({ severity: "success", message: response.data.message })
         );
+        window.localStorage.setItem("user_id", response.data.user_id);
       })
       .catch(function (err) {
-        console.log(err);
-
         dispatch(
           showSnackbar({
             severity: "error",
             message: err.message,
           })
         );
+        console.log(err.message);
       });
   };
 }
 
 export function LogoutUser() {
   return async (dispatch, getState) => {
+    window.localStorage.removeItem("user_id");
     dispatch(slice.actions.signOut());
   };
 }
@@ -193,6 +193,8 @@ export function VerifyEmail(formValues) {
             token: response.data.token,
           })
         );
+
+        window.localStorage.setItem("user_id", response.data.user_id);
       })
       .catch((error) => {
         console.log(error);
