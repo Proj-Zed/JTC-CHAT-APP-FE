@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
 //
-
+const BACKEND_URL = "http://192.168.8.63:3001";
 const initialState = {
   sidebar: {
     open: false,
@@ -99,7 +99,7 @@ export const closeSnackbar = () => async (dispatch, getState) => {
 export const FetchUsers = () => {
   return async (dispatch, getState) => {
     await axios
-      .get("/user/get-users", {
+      .get(`/user/get-users`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -118,7 +118,7 @@ export const FetchUsers = () => {
 export const FetchFriends = () => {
   return async (dispatch, getState) => {
     await axios
-      .get("/user/get-friends", {
+      .get(`/user/get-friends`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -137,7 +137,7 @@ export const FetchFriends = () => {
 export const FetchFriendsRequest = () => {
   return async (dispatch, getState) => {
     await axios
-      .get("/user/get-friend-requests", {
+      .get(`/user/get-friend-requests`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,

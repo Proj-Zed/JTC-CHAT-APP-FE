@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
 import { showSnackbar } from "./app";
+
+const BACKEND_URL = "http://192.168.8.63:3001";
+
 const initialState = {
   isLoading: false,
   isLoggedIn: false,
@@ -33,13 +36,13 @@ const slice = createSlice({
 
 //Reducer
 export default slice.reducer;
-
+//TODO => setup backend auth login get the verify
 //Log in
 export function LoginUser(formValues) {
   return async (dispatch, getState) => {
     await axios
       .post(
-        "/auth/login",
+        `/auth/login`,
         {
           ...formValues,
         },
@@ -84,7 +87,7 @@ export function ForgotPassword(formValues) {
   return async (dispatch, getState) => {
     await axios
       .post(
-        "/auth/forgot-password",
+        `/auth/forgot-password`,
         {
           ...formValues,
         },
@@ -107,7 +110,7 @@ export function NewPassword(formValues) {
   return async (dispatch, getState) => {
     await axios
       .post(
-        "/auth/reset-password",
+        `/auth/reset-password`,
         {
           ...formValues,
         },
@@ -137,7 +140,7 @@ export function RegisterUser(formValues) {
     dispatch(slice.actions.updateIsLoading({ isLoading: true, error: false }));
     await axios
       .post(
-        "/auth/register",
+        `/auth/register`,
         {
           ...formValues,
         },
@@ -174,7 +177,7 @@ export function VerifyEmail(formValues) {
   return async (dispatch, getState) => {
     await axios
       .post(
-        "/auth/verify",
+        `/auth/verify`,
         {
           ...formValues,
         },
